@@ -27,7 +27,7 @@ const categories = Array.from(new Set(allCategories))
         <div
             class="grid grid-cols-[auto,1fr] gap-x-14 gap-y-3 mb-16 max-lg:grid-cols-1"
         >
-            <CategoryList categories={["All categories", ...categories]} />
+            <CategoryList categories={categories} />
         </div>
 
         <div class="mb-60 max-sm:mb-36">
