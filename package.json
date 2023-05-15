@@ -19,7 +19,6 @@
         "@astrojs/vercel": "^3.3.0",
         "@cloudinary/url-gen": "^1.10.0",
         "@fontsource/cabin": "^4.5.10",
-        "@xata.io/client": "^0.23.5",
         "astro": "^2.4.1",
         "bcryptjs": "^2.4.3",
         "date-fns": "^2.30.0",
