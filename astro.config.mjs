@@ -12,6 +12,6 @@ export default defineConfig({
     markdown: {
         remarkPlugins: [remarkReadingTime],
     },
-    output: "server",
+    output: "static",
     site: "https://rhythm.nation",
 })
