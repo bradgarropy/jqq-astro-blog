@@ -8,10 +8,10 @@ import CategoryList from "../../components/CategoryList.astro"
 import Share from "../../components/Share.astro"
 import {getThumbnail} from "../../cloudinary"
 import TableOfContents from "../../components/TableOfContents.astro"
+import PostMeta from "../../components/PostMeta.astro"
 
 export const getStaticPaths = async () => {
     const posts = await getCollection("posts")
-    const authors = await getCollection("authors")
 
     const paths = posts.map(post => {
         const relatedPosts = posts
@@ -28,7 +28,6 @@ export const getStaticPaths = async () => {
             },
             props: {
                 post,
-                author,
                 relatedPosts,
             },
         }
@@ -39,12 +38,11 @@ export const getStaticPaths = async () => {
 
 type Props = {
     post: CollectionEntry<"posts">
-    author: CollectionEntry<"authors">
     relatedPosts: CollectionEntry<"posts">[]
 }
 
-const {post, author, relatedPosts} = Astro.props
-const {Content, headings, remarkPluginFrontmatter} = await post.render()
+const {post, relatedPosts} = Astro.props
+const {Content, headings} = await post.render()
 ---
 
 <Layout title={post.data.title} image={getThumbnail(post.data.title)}>
@@ -61,31 +59,7 @@ const {Content, headings, remarkPluginFrontmatter} = await post.render()
             {post.data.title}
         </p>
 
-        <div class="flex justify-between items-center mb-10">
-            <div class="flex items-center gap-x-2">
-                <a href={`/author/${author.slug}`}>
-                    <Image
-                        src={author.data.image}
-                        alt={author.data.name}
-                        width={48}
-                        height={48}
-                        format="webp"
-                        class="rounded-full border-2 border-teal-500 aspect-square w-12 object-cover"
-                    />
-                </a>
-
-                <a
-                    href={`/author/${author.slug}`}
-                    class="text-zinc-600 text-2xl font-bold"
-                >
-                    {author.data.name}
-                </a>
-            </div>
-
-            <span class="text-zinc-600 text-xl">
-                {remarkPluginFrontmatter.minutesRead} | {post.data.date}
-            </span>
-        </div>
+        <PostMeta post={post} />
 
         <Image
             src={post.data.image}
