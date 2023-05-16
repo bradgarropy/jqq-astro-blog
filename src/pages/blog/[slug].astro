@@ -6,7 +6,6 @@ import Layout from "../../layouts/Layout.astro"
 import PostList from "../../components/PostList.astro"
 import CategoryList from "../../components/CategoryList.astro"
 import Share from "../../components/Share.astro"
-import {getThumbnail} from "../../cloudinary"
 import TableOfContents from "../../components/TableOfContents.astro"
 import PostMeta from "../../components/PostMeta.astro"
 
@@ -45,7 +44,10 @@ const {post, relatedPosts} = Astro.props
 const {Content, headings} = await post.render()
 ---
 
-<Layout title={post.data.title} image={getThumbnail(post.data.title)}>
+<Layout
+    title={post.data.title}
+    image={"https://res.cloudinary.com/bradgarropy/image/upload/jqq-astro-blog/template.png"}
+>
     <main class="px-24 max-sm:px-5 max-w-5xl w-full justify-self-center">
         <div class="text-zinc-500 text-2xl mb-16">
             ← <a href="/blog" class="underline">Back to all blogs</a>
